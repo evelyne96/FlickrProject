@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,9 @@
 		DB642747262B2DB60021545A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB642746262B2DB60021545A /* Preview Assets.xcassets */; };
 		DB642752262B2DB70021545A /* FlickrProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB642751262B2DB70021545A /* FlickrProjectTests.swift */; };
 		DB64275D262B2DB70021545A /* FlickrProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB64275C262B2DB70021545A /* FlickrProjectUITests.swift */; };
+		DB642772262B338D0021545A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DB642771262B338D0021545A /* Alamofire */; };
+		DB642782262B372C0021545A /* PhotoSearchFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB642776262B35370021545A /* PhotoSearchFeedView.swift */; };
+		DB642787262B3CCF0021545A /* SearchBarUIRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB642786262B3CCF0021545A /* SearchBarUIRepresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +48,8 @@
 		DB642758262B2DB70021545A /* FlickrProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickrProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB64275C262B2DB70021545A /* FlickrProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrProjectUITests.swift; sourceTree = "<group>"; };
 		DB64275E262B2DB70021545A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB642776262B35370021545A /* PhotoSearchFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchFeedView.swift; sourceTree = "<group>"; };
+		DB642786262B3CCF0021545A /* SearchBarUIRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarUIRepresentable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB642772262B338D0021545A /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +101,8 @@
 		DB64273E262B2DB50021545A /* FlickrProject */ = {
 			isa = PBXGroup;
 			children = (
+				DB64278B262B3CD40021545A /* UI */,
+				DB64277B262B35460021545A /* PhotoSearchFeature */,
 				DB64273F262B2DB50021545A /* FlickrProjectApp.swift */,
 				DB642741262B2DB50021545A /* ContentView.swift */,
 				DB642743262B2DB60021545A /* Assets.xcassets */,
@@ -130,6 +138,22 @@
 			path = FlickrProjectUITests;
 			sourceTree = "<group>";
 		};
+		DB64277B262B35460021545A /* PhotoSearchFeature */ = {
+			isa = PBXGroup;
+			children = (
+				DB642776262B35370021545A /* PhotoSearchFeedView.swift */,
+			);
+			path = PhotoSearchFeature;
+			sourceTree = "<group>";
+		};
+		DB64278B262B3CD40021545A /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				DB642786262B3CCF0021545A /* SearchBarUIRepresentable.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,6 +170,9 @@
 			dependencies = (
 			);
 			name = FlickrProject;
+			packageProductDependencies = (
+				DB642771262B338D0021545A /* Alamofire */,
+			);
 			productName = FlickrProject;
 			productReference = DB64273C262B2DB50021545A /* FlickrProject.app */;
 			productType = "com.apple.product-type.application";
@@ -217,6 +244,9 @@
 				Base,
 			);
 			mainGroup = DB642733262B2DB50021545A;
+			packageReferences = (
+				DB642770262B338D0021545A /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = DB64273D262B2DB50021545A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -261,6 +291,8 @@
 			files = (
 				DB642742262B2DB50021545A /* ContentView.swift in Sources */,
 				DB642740262B2DB50021545A /* FlickrProjectApp.swift in Sources */,
+				DB642787262B3CCF0021545A /* SearchBarUIRepresentable.swift in Sources */,
+				DB642782262B372C0021545A /* PhotoSearchFeedView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,6 +612,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DB642770262B338D0021545A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DB642771262B338D0021545A /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DB642770262B338D0021545A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DB642734262B2DB50021545A /* Project object */;
 }
