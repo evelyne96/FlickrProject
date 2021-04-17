@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB3D02E0262B4280008CAD86 /* PhotoSearchFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3D02DF262B4280008CAD86 /* PhotoSearchFeedViewModel.swift */; };
 		DB642740262B2DB50021545A /* FlickrProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB64273F262B2DB50021545A /* FlickrProjectApp.swift */; };
 		DB642742262B2DB50021545A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB642741262B2DB50021545A /* ContentView.swift */; };
 		DB642744262B2DB60021545A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB642743262B2DB60021545A /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB3D02DF262B4280008CAD86 /* PhotoSearchFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchFeedViewModel.swift; sourceTree = "<group>"; };
 		DB64273C262B2DB50021545A /* FlickrProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB64273F262B2DB50021545A /* FlickrProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrProjectApp.swift; sourceTree = "<group>"; };
 		DB642741262B2DB50021545A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				DB642776262B35370021545A /* PhotoSearchFeedView.swift */,
+				DB3D02DF262B4280008CAD86 /* PhotoSearchFeedViewModel.swift */,
 			);
 			path = PhotoSearchFeature;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				DB642740262B2DB50021545A /* FlickrProjectApp.swift in Sources */,
 				DB642787262B3CCF0021545A /* SearchBarUIRepresentable.swift in Sources */,
 				DB642782262B372C0021545A /* PhotoSearchFeedView.swift in Sources */,
+				DB3D02E0262B4280008CAD86 /* PhotoSearchFeedViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
