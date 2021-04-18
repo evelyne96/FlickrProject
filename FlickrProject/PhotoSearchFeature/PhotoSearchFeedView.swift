@@ -13,9 +13,13 @@ struct PhotoSearchFeedView: View {
     var body: some View {
         VStack {
             SearchBar(text: $viewModel.searchString)
-            List(viewModel.photoVMs, id: \.self) { photoVM in
-                NavigationLink(destination: PhotoDetailView(photoVM: photoVM)) {
-                    PhotoRowView(photoViewModel: photoVM)
+            ScrollView {
+                LazyVStack{
+                    ForEach(viewModel.photoVMs, id: \.self) { photoVM in
+                        NavigationLink(destination: PhotoDetailView(photoVM: photoVM)) {
+                            PhotoRowView(photoViewModel: photoVM)
+                        }
+                    }
                 }
             }.navigationBarTitle("Search Photos")
         }
