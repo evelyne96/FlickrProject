@@ -8,13 +8,28 @@
 import Foundation
 
 class PhotoSearchFeedViewModel: ObservableObject {
-    private let names = ["Eve", "Evelyne", "Zoli", "Juli", "Sanyi"]
+    private let flickrClient: FlickrAPIClient
+    private var currentTask: URLSessionTask?
+    
+    init(flickrClient: FlickrAPIClient) {
+        self.flickrClient = flickrClient
+    }
+    
     @Published var searchResult = [String]()
     @Published var searchString: String = "dog" {
         didSet {
             // TODO: cancel last photo search
             // kick off a new photo search
-            searchResult = searchString.count == 0 ? names : names.filter { $0.hasPrefix(searchString) }
+            currentTask?.cancel()
+            currentTask = flickrClient.fetchSearchResults(text: searchString, page: 5, completion: { [weak self] result in
+                switch result {
+                case .success( _):
+                    break
+                case .failure( _):
+                    break
+                }
+                self?.currentTask = nil
+            })
         }
     }
 }
