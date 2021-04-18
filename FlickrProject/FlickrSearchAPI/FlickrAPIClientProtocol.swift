@@ -12,6 +12,10 @@ enum FlickrSearchLoaderResult {
     case failure(Error)
 }
 
+protocol Cancellable {
+    func doCancel()
+}
+
 protocol FlickrAPIClient: class {
-    func fetchSearchResults(text: String, page: Int, completion: @escaping (FlickrSearchLoaderResult) -> Void) -> URLSessionTask?
+    func fetchSearchResults(text: String, page: Int, completion: @escaping (FlickrSearchLoaderResult) -> Void) -> Cancellable?
 }

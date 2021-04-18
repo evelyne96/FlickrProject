@@ -11,7 +11,7 @@ import Foundation
 //https://www.flickr.com/services/api/flickr.photos.search.html
 
 class FlickrDataLoader: FlickrAPIClient {
-    func fetchSearchResults(text: String, page: Int, completion: @escaping (FlickrSearchLoaderResult) -> Void) -> URLSessionTask? {
+    func fetchSearchResults(text: String, page: Int, completion: @escaping (FlickrSearchLoaderResult) -> Void) -> Cancellable? {
         guard let request = FlickrAPI.searchPhotos(page: page, keyword: text).urlRequest else {
             completion(.failure(RequestCreationError.failedToCreateRequest))
             return nil
@@ -26,6 +26,6 @@ class FlickrDataLoader: FlickrAPIClient {
                 completion(.failure(error))
             }
         }
-        return afrequest.task
+        return afrequest
     }
 }

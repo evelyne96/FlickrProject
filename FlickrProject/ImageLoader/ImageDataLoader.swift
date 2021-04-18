@@ -12,7 +12,7 @@ import UIKit
 class ImageDataLoader: ImageAPIClient {
     static func fetchImage(url: URL,
                            lastModified: Date?,
-                           completion: @escaping (ImageLoaderResult) -> Void) -> Request {
+                           completion: @escaping (ImageLoaderResult) -> Void) -> Cancellable {
         
         let request = AF.request(url)
         request.validate(statusCode: 200..<300).responseData { response in

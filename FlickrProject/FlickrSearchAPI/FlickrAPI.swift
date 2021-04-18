@@ -19,7 +19,7 @@ public enum FlickrAPI {
                       noJSONCallback: String = "1",
                       perPage: Int = 20,
                       sort: FlickrAPI.supportedSort = FlickrAPI.supportedSort.relevant,
-                      extras: String = "url_o",
+                      extras: String = "url_m",
                       page: Int = 1,
                       keyword: String)
 }

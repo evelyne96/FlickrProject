@@ -9,27 +9,52 @@ import Foundation
 
 class PhotoSearchFeedViewModel: ObservableObject {
     private let flickrClient: FlickrAPIClient
-    private var currentTask: URLSessionTask?
+    private var currentTask: Cancellable?
+    private let pendingOperations: PendingImageOperations
     
     init(flickrClient: FlickrAPIClient) {
         self.flickrClient = flickrClient
+        self.pendingOperations = PendingImageOperations()
+        self.searchString = "dog"
     }
     
     @Published var photoVMs = [PhotoViewModel]()
-    @Published var searchString: String = "dog" {
+    @Published var searchString: String {
         didSet {
-            // TODO: cancel last photo search
-            // kick off a new photo search
-            currentTask?.cancel()
-            currentTask = flickrClient.fetchSearchResults(text: searchString, page: 1, completion: { [weak self] result in
-                switch result {
-                case .success(let photosPage):
-                    self?.photoVMs = photosPage.photos.map{ PhotoViewModel(photoModel: $0) }
-                case .failure( _):
-                    break
-                }
-                self?.currentTask = nil
-            })
+            startSearch()
         }
+    }
+    
+    
+    func startSearch() {
+        currentTask?.doCancel()
+        pendingOperations.imageDownloadQueue.cancelAllOperations()
+        currentTask = flickrClient.fetchSearchResults(text: searchString, page: 1, completion: { [weak self] result in
+            switch result {
+            case .success(let photosPage):
+                self?.photoVMs = photosPage.photos.map{ PhotoViewModel(photoModel: $0) }
+                self?.photoVMs.forEach{ self?.fetchImage(for: $0) }
+            case .failure( _):
+                break
+            }
+            self?.currentTask = nil
+        })
+    }
+    
+    private func fetchImage(for photoVM: PhotoViewModel) {
+        guard let url = photoVM.imageURL, photoVM.imageDownloadstate != .downloaded else { return }
+        photoVM.imageDownloadstate = .inProgress
+        let op = ImageDownloadOperation(url: url) { result in
+            switch result {
+            case .success(let image):
+                photoVM.imageDownloadstate = .downloaded
+                photoVM.image = image
+            case .failure(_):
+                photoVM.imageDownloadstate = .failed
+                break
+            }
+        }
+        
+        pendingOperations.imageDownloadQueue.addOperation(op)
     }
 }

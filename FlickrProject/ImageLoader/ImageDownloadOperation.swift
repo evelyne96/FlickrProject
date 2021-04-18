@@ -5,14 +5,13 @@
 //  Created by Suto, Evelyne on 18/04/2021.
 //
 
-import Alamofire
 import Foundation
 import UIKit
 
 class ImageDownloadOperation: AsyncOperation {
     let url: URL
     let imageCompletionBlock: (ImageLoaderResult) -> Void
-    var request: Request?
+    var request: Cancellable?
     
     init(url: URL, completionBlock: @escaping (ImageLoaderResult) -> Void) {
         self.url = url
@@ -28,7 +27,7 @@ class ImageDownloadOperation: AsyncOperation {
     
     override func cancel() {
         super.cancel()
-        request?.cancel()
+        request?.doCancel()
     }
 }
 

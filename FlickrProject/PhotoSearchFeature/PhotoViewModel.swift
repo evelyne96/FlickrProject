@@ -10,15 +10,19 @@ import SwiftUI
 
 class PhotoViewModel: ObservableObject, Hashable {
     private let photoModel: PhotoModel
+    @Published var image = UIImage(systemName: "photo")!
+    @Published var imageDownloadstate: DownloadState = .new
     
     init(photoModel: PhotoModel) {
         self.photoModel = photoModel
     }
     
-    @Published var image = UIImage(systemName: "face.smiling") ?? UIImage()
-    
     var displayedName: String {
         return photoModel.title
+    }
+    
+    var imageURL: URL? {
+        return photoModel.url
     }
     
     static func == (lhs: PhotoViewModel, rhs: PhotoViewModel) -> Bool {

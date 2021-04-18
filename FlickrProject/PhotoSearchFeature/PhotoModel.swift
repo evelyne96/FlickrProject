@@ -20,6 +20,6 @@ struct PhotoModel: Decodable {
         case id, title, owner, secret, server
         
         case isPublic = "ispublic"
-        case url = "url_o"
+        case url = "url_m"
     }
 }
