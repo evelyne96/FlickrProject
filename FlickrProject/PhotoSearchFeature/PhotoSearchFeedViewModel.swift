@@ -15,16 +15,16 @@ class PhotoSearchFeedViewModel: ObservableObject {
         self.flickrClient = flickrClient
     }
     
-    @Published var searchResult = [String]()
+    @Published var photoVMs = [PhotoViewModel]()
     @Published var searchString: String = "dog" {
         didSet {
             // TODO: cancel last photo search
             // kick off a new photo search
             currentTask?.cancel()
-            currentTask = flickrClient.fetchSearchResults(text: searchString, page: 5, completion: { [weak self] result in
+            currentTask = flickrClient.fetchSearchResults(text: searchString, page: 1, completion: { [weak self] result in
                 switch result {
-                case .success( _):
-                    break
+                case .success(let photosPage):
+                    self?.photoVMs = photosPage.photos.map{ PhotoViewModel(photoModel: $0) }
                 case .failure( _):
                     break
                 }
