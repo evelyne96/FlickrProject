@@ -15,9 +15,9 @@ struct PhotoSearchFeedView: View {
     var body: some View {
         VStack {
             SearchBar(text: $viewModel.searchString)
-            PhotoGridView(dataSource: viewModel.dataSource, gridLayout: gridLayout).navigationBarTitle("Search Photos").onAppear(perform: {
+            PhotoGridView(dataSource: viewModel.dataSource, gridLayout: gridLayout).navigationBarTitle("Search Photos").onLoad {
                 viewModel.startSearch()
-            })
+            }
         }
     }
 }
