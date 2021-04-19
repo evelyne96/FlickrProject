@@ -33,6 +33,8 @@
 		DBB676D7262CBB200002DC62 /* PhotoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB676D6262CBB200002DC62 /* PhotoRowView.swift */; };
 		DBB676DC262CBB330002DC62 /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB676DB262CBB330002DC62 /* PhotoDetailView.swift */; };
 		DBB676ED262CE4460002DC62 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB676EC262CE4460002DC62 /* PhotoView.swift */; };
+		DBFAB4F5262E083F006FB746 /* PhotoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFAB4F4262E083F006FB746 /* PhotoDataSource.swift */; };
+		DBFAB4FA262E0860006FB746 /* PhotoGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFAB4F9262E0860006FB746 /* PhotoGridView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +86,8 @@
 		DBB676D6262CBB200002DC62 /* PhotoRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRowView.swift; sourceTree = "<group>"; };
 		DBB676DB262CBB330002DC62 /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
 		DBB676EC262CE4460002DC62 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
+		DBFAB4F4262E083F006FB746 /* PhotoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDataSource.swift; sourceTree = "<group>"; };
+		DBFAB4F9262E0860006FB746 /* PhotoGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,14 +182,8 @@
 		DB64277B262B35460021545A /* PhotoSearchFeature */ = {
 			isa = PBXGroup;
 			children = (
-				DB642776262B35370021545A /* PhotoSearchFeedView.swift */,
-				DB3D02DF262B4280008CAD86 /* PhotoSearchFeedViewModel.swift */,
-				DBB676C2262CAC6C0002DC62 /* PhotoPageModel.swift */,
-				DBB676C7262CAC900002DC62 /* PhotoModel.swift */,
-				DBB676D1262CBB070002DC62 /* PhotoViewModel.swift */,
-				DBB676D6262CBB200002DC62 /* PhotoRowView.swift */,
-				DBB676DB262CBB330002DC62 /* PhotoDetailView.swift */,
-				DBB676EC262CE4460002DC62 /* PhotoView.swift */,
+				DBFAB502262E08CA006FB746 /* Views */,
+				DBFAB4FE262E0897006FB746 /* Logic */,
 			);
 			path = PhotoSearchFeature;
 			sourceTree = "<group>";
@@ -227,6 +225,30 @@
 				DBB676CC262CAE1C0002DC62 /* FlickrAPIClientProtocol.swift */,
 			);
 			path = FlickrSearchAPI;
+			sourceTree = "<group>";
+		};
+		DBFAB4FE262E0897006FB746 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				DBB676C7262CAC900002DC62 /* PhotoModel.swift */,
+				DBB676C2262CAC6C0002DC62 /* PhotoPageModel.swift */,
+				DBB676D1262CBB070002DC62 /* PhotoViewModel.swift */,
+				DBFAB4F4262E083F006FB746 /* PhotoDataSource.swift */,
+				DB3D02DF262B4280008CAD86 /* PhotoSearchFeedViewModel.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		DBFAB502262E08CA006FB746 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DB642776262B35370021545A /* PhotoSearchFeedView.swift */,
+				DBFAB4F9262E0860006FB746 /* PhotoGridView.swift */,
+				DBB676D6262CBB200002DC62 /* PhotoRowView.swift */,
+				DBB676DB262CBB330002DC62 /* PhotoDetailView.swift */,
+				DBB676EC262CE4460002DC62 /* PhotoView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,6 +393,8 @@
 				DBB676C8262CAC900002DC62 /* PhotoModel.swift in Sources */,
 				DBB676A8262C893B0002DC62 /* FlickrSearchAPIClient.swift in Sources */,
 				DBB676B9262C93250002DC62 /* FlickrAPI.swift in Sources */,
+				DBFAB4F5262E083F006FB746 /* PhotoDataSource.swift in Sources */,
+				DBFAB4FA262E0860006FB746 /* PhotoGridView.swift in Sources */,
 				DBB676D7262CBB200002DC62 /* PhotoRowView.swift in Sources */,
 				DBA4F9DA262DF9980012BEA9 /* UserDefault.swift in Sources */,
 				DBB676D2262CBB070002DC62 /* PhotoViewModel.swift in Sources */,

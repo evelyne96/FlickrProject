@@ -1,50 +1,56 @@
 //
-//  PhotoSearchFeedViewModel.swift
+//  PhotoDataSource.swift
 //  FlickrProject
 //
-//  Created by Suto, Evelyne on 17/04/2021.
+//  Created by Suto, Evelyne on 19/04/2021.
 //
 
 import Foundation
 
-class PhotoSearchFeedViewModel: ObservableObject {
-    private static let defaultSearchString = "Vizsla"
-    private let flickrClient: FlickrAPIClient
+class PhotoDataSource: ObservableObject {
+    @Published var items = [PhotoViewModel]()
+    
+    private var currentPage = 1
     private var currentTask: Cancellable?
     private let pendingOperations: PendingImageOperations
+    private let flickrClient: FlickrAPIClient
+    private let threshHold = 5
     
-    init(flickrClient: FlickrAPIClient) {
-        self.flickrClient = flickrClient
+    init(apiClient: FlickrAPIClient) {
         self.pendingOperations = PendingImageOperations()
-        if let searchText = UserPrefs.shared.searchText, searchText.count > 0 {
-            self.searchString = searchText
-        } else {
-            self.searchString = PhotoSearchFeedViewModel.defaultSearchString
-        }
+        self.flickrClient = apiClient
     }
     
-    @Published var photoVMs = [PhotoViewModel]()
-    @Published var searchString: String {
-        didSet {
-            startSearch()
-        }
+    func startNewSearch(text: String) {
+        resetSearch()
+        UserPrefs.shared.searchText = text
+        search(text: text)
     }
     
-    
-    func startSearch() {
-        UserPrefs.shared.searchText = searchString
+    private func resetSearch() {
         currentTask?.doCancel()
         pendingOperations.imageDownloadQueue.cancelAllOperations()
-        currentTask = flickrClient.fetchSearchResults(text: searchString, page: 1, completion: { [weak self] result in
+        currentPage = 1
+        items = []
+    }
+    
+    private func search(text: String) {
+        currentTask = flickrClient.fetchSearchResults(text: text, page: currentPage, completion: { [weak self] result in
             switch result {
             case .success(let photosPage):
-                self?.photoVMs = photosPage.photos.map{ PhotoViewModel(photoModel: $0) }
-                self?.photoVMs.forEach{ self?.fetchImage(for: $0) }
+                self?.items += photosPage.photos.map{ PhotoViewModel(photoModel: $0) }
+                self?.items.forEach{ self?.fetchImage(for: $0) }
             case .failure( _):
                 break
             }
             self?.currentTask = nil
         })
+    }
+    
+    func loadNewDataIfNeeded(photoVM: PhotoViewModel) {
+        guard let index = items.firstIndex(of: photoVM), let searchText = UserPrefs.shared.searchText, items.count - index < threshHold else { return }
+        currentPage += 1
+        search(text: searchText)
     }
     
     private func fetchImage(for photoVM: PhotoViewModel) {
