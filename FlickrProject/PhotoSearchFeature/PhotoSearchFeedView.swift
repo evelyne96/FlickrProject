@@ -25,7 +25,9 @@ struct PhotoSearchFeedView: View {
                     }
                 }
                 .padding(.all, 10)
-            }.navigationBarTitle("Search Photos")
+            }.navigationBarTitle("Search Photos").onAppear(perform: {
+                viewModel.startSearch()
+            })
         }
     }
 }

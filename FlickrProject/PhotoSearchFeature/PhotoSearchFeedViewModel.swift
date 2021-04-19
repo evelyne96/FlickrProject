@@ -8,6 +8,7 @@
 import Foundation
 
 class PhotoSearchFeedViewModel: ObservableObject {
+    private static let defaultSearchString = "Vizsla"
     private let flickrClient: FlickrAPIClient
     private var currentTask: Cancellable?
     private let pendingOperations: PendingImageOperations
@@ -15,7 +16,7 @@ class PhotoSearchFeedViewModel: ObservableObject {
     init(flickrClient: FlickrAPIClient) {
         self.flickrClient = flickrClient
         self.pendingOperations = PendingImageOperations()
-        self.searchString = "dog"
+        self.searchString = UserPrefs.shared.searchText ?? PhotoSearchFeedViewModel.defaultSearchString
     }
     
     @Published var photoVMs = [PhotoViewModel]()
@@ -27,6 +28,7 @@ class PhotoSearchFeedViewModel: ObservableObject {
     
     
     func startSearch() {
+        UserPrefs.shared.searchText = searchString
         currentTask?.doCancel()
         pendingOperations.imageDownloadQueue.cancelAllOperations()
         currentTask = flickrClient.fetchSearchResults(text: searchString, page: 1, completion: { [weak self] result in
