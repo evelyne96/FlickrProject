@@ -16,7 +16,11 @@ class PhotoSearchFeedViewModel: ObservableObject {
     init(flickrClient: FlickrAPIClient) {
         self.flickrClient = flickrClient
         self.pendingOperations = PendingImageOperations()
-        self.searchString = UserPrefs.shared.searchText ?? PhotoSearchFeedViewModel.defaultSearchString
+        if let searchText = UserPrefs.shared.searchText, searchText.count > 0 {
+            self.searchString = searchText
+        } else {
+            self.searchString = PhotoSearchFeedViewModel.defaultSearchString
+        }
     }
     
     @Published var photoVMs = [PhotoViewModel]()
