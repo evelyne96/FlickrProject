@@ -13,7 +13,7 @@ struct PhotoView: View {
     
     var body: some View {
         if viewModel.imageDownloadstate == .inProgress {
-            ProgressView()
+            ProgressView().frame(minWidth: 0, maxWidth: .infinity).frame(height: 200)
         } else {
             Image(uiImage: viewModel.image)
                 .resizable()
