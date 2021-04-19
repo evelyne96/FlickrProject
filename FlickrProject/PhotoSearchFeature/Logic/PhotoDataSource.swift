@@ -7,6 +7,7 @@
 
 import Foundation
 
+// TODO:  Does not handle any error if no more page is available + overall the whole app doesn't do any error handling
 class PhotoDataSource: ObservableObject {
     @Published var items = [PhotoViewModel]()
     
