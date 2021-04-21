@@ -15,11 +15,13 @@ class PhotoDataSource: ObservableObject {
     private var currentTask: Cancellable?
     private let pendingOperations: PendingImageOperations
     private let flickrClient: FlickrAPIClient
+    private let imageLoader: ImageAPIClient
     private let threshHold = 5
     
-    init(apiClient: FlickrAPIClient) {
+    init(apiClient: FlickrAPIClient, imageLoader: ImageAPIClient = ImageDataLoader()) {
         self.pendingOperations = PendingImageOperations()
         self.flickrClient = apiClient
+        self.imageLoader = imageLoader
     }
     
     func startNewSearch(text: String) {
@@ -57,7 +59,7 @@ class PhotoDataSource: ObservableObject {
     private func fetchImage(for photoVM: PhotoViewModel) {
         guard let url = photoVM.imageURL, photoVM.imageDownloadstate != .downloaded else { return }
         photoVM.imageDownloadstate = .inProgress
-        let op = ImageDownloadOperation(url: url) { result in
+        let op = ImageDownloadOperation(url: url, imageLoader: imageLoader) { result in
             switch result {
             case .success(let image):
                 photoVM.imageDownloadstate = .downloaded

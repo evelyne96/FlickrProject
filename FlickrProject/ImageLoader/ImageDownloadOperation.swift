@@ -11,15 +11,17 @@ import UIKit
 class ImageDownloadOperation: AsyncOperation {
     let url: URL
     let imageCompletionBlock: (ImageLoaderResult) -> Void
-    var request: Cancellable?
+    private var request: Cancellable?
+    private let imageLoader: ImageAPIClient
     
-    init(url: URL, completionBlock: @escaping (ImageLoaderResult) -> Void) {
+    init(url: URL, imageLoader: ImageAPIClient = ImageDataLoader(), completionBlock: @escaping (ImageLoaderResult) -> Void) {
         self.url = url
         self.imageCompletionBlock = completionBlock
+        self.imageLoader = imageLoader
     }
     
     override func execute() {
-        request = ImageDataLoader.fetchImage(url: self.url, lastModified: nil) { [weak self] (result) in
+        request = imageLoader.fetchImage(url: self.url, lastModified: nil) { [weak self] (result) in
             self?.imageCompletionBlock(result)
             self?.executeCompleted?()
         }

@@ -27,6 +27,13 @@ struct PhotoPageModel: Decodable {
     let total: Int
     let photos: [PhotoModel]
     
+    init(page: Int, pages: Int, total: Int, photos: [PhotoModel]) {
+        self.page = page
+        self.pages = pages
+        self.total = total
+        self.photos = photos
+    }
+    
     enum CodingKeys: String, CodingKey {
         case page, pages, total
         case photos = "photo"

@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class PhotoViewModel: ObservableObject, Hashable {
-    private let photoModel: PhotoModel
+    fileprivate let photoModel: PhotoModel
     @Published var image = UIImage(systemName: "photo")!
     @Published var imageDownloadstate: DownloadState = .new
     
@@ -31,5 +31,11 @@ class PhotoViewModel: ObservableObject, Hashable {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(photoModel.id)
+    }
+}
+
+extension Array where Element == PhotoViewModel {
+    func toModels() -> [PhotoModel] {
+        return map { $0.photoModel }
     }
 }

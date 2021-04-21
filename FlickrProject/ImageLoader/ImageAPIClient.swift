@@ -22,8 +22,6 @@ enum ImageLoaderResult {
 }
 
 protocol ImageAPIClient: class {
-    static func fetchImage(url: URL,
-                           lastModified: Date?,
-                           completion: @escaping (ImageLoaderResult) -> Void) -> Cancellable
+    func fetchImage(url: URL, lastModified: Date?, completion: @escaping (ImageLoaderResult) -> Void) -> Cancellable
 }
 
