@@ -7,6 +7,8 @@
 
 import Foundation
 
+//https://www.avanderlee.com/swift/property-wrappers/
+
 protocol PropertyListValue {}
 
 struct Key: RawRepresentable {

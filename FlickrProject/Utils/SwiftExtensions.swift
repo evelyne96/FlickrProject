@@ -25,7 +25,7 @@ extension Request: Cancellable {
     }
 }
 
-
+// https://developer.apple.com/documentation/swiftui/viewmodifier
 struct ViewDidLoadModifier: ViewModifier {
     @State private var didLoad = false
     private let action: (() -> Void)?
